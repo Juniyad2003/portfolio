@@ -59,6 +59,7 @@ public class TransactionController {
         Transaction updated = transactionService.updateTransaction(transaction);
         return new ResponseEntity<>(updated, HttpStatus.OK);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Transaction> deleteTransaction(@PathVariable int id)
             throws InvalidTransactionIdException {

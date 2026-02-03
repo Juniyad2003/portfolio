@@ -1,9 +1,16 @@
 package com.finance.service;
 
+import com.finance.entity.Asset;
+import com.finance.entity.Portfolio;
+import com.finance.repo.AssetRepo;
+import com.finance.repo.PortfolioRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 @Service
 public class GroqAiService {
@@ -35,7 +42,13 @@ public class GroqAiService {
             }
           ]
         }
-        """.formatted(question.replace("\"", ""));
+        """.formatted(
+                question
+                        .replace("\\", "\\\\")
+                        .replace("\"", "")
+                        .replace("\n", "\\n")
+                        .replace("\r", "")
+        );
 
         HttpEntity<String> request = new HttpEntity<>(body, headers);
 
@@ -50,4 +63,49 @@ public class GroqAiService {
             return "Groq API error: " + e.getMessage();
         }
     }
+
+    @Autowired
+    public PortfolioRepo portfolioRepo;
+
+    @Autowired
+    public AssetRepo assetRepo;
+
+    public String analyzePortfolioFromDb(int portfolioId) {
+
+        Portfolio portfolio = portfolioRepo.findById(portfolioId)
+                .orElseThrow(() -> new RuntimeException("Portfolio not found"));
+
+        List<Asset> assets = assetRepo.findAllByPortfolio(portfolio);
+
+        StringBuilder prompt = new StringBuilder();
+
+        prompt.append("Analyze the following investment portfolio:\n");
+        prompt.append("Investor name: ").append(portfolio.getName()).append("\n");
+        prompt.append("Goal: ").append(portfolio.getInvestmentGoal()).append("\n");
+        prompt.append("Risk preference: ").append(portfolio.getRiskPreference()).append("\n");
+        prompt.append("Total investment: ").append(portfolio.getTotalInvestment()).append("\n");
+        prompt.append("Current value: ").append(portfolio.getCurrentValue()).append("\n");
+        prompt.append("Profit/Loss: ")
+                .append(portfolio.getCurrentValue() - portfolio.getTotalInvestment())
+                .append("\n\n");
+
+        prompt.append("Assets:\n");
+
+        for (Asset a : assets) {
+            prompt.append(
+                    "Asset: " + a.getAssetName() +
+                            ", Type: " + a.getAssetType() +
+                            ", Invested: " + a.getInvestedAmount() +
+                            ", Current: " + a.getCurrentAmount() + "\n"
+            );
+        }
+
+        prompt.append(
+                "\nGive risk analysis, diversification quality, and improvement suggestions. Do not give investment advice."
+        );
+
+        return askAi(prompt.toString());
+    }
+
+
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AssetRepo extends JpaRepository<Asset,Integer> {
+public interface AssetRepo extends JpaRepository<Asset, Integer> {
     public List<Asset>
     findAllByPortfolio(Portfolio portfolio);
 }

@@ -40,8 +40,6 @@ public class Asset {
     List<Transaction> transactions;
 
 
-
-
     public Asset() {
         super();
     }
