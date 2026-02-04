@@ -1,41 +1,39 @@
-name: Portfolio Manager CI
+name: Spring Boot CI
 
 on:
   push:
-    branches:
-      - master
-      - main
-      - develop
+    branches: [ "main", "master", "develop" ]
   pull_request:
-    branches:
-      - master
-      - main
-      - develop
+    branches: [ "main", "master", "develop" ]
 
 jobs:
-  build-test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout source code
+      # 1. Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
+      # 2. Set up Java 17
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Cache Maven dependencies
+      # 3. Cache Maven dependencies
+      - name: Cache Maven packages
         uses: actions/cache@v4
         with:
           path: ~/.m2
-          key: maven-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
-            maven-${{ runner.os }}-
+            ${{ runner.os }}-maven-
 
-      - name: Build and run tests
-        run: mvn clean test
-
-      - name: Package application
-        run: mvn clean package -DskipTests
+      # 4. Build project (NO DB, NO MySQL)
+      - name: Build Spring Boot project
+        run: |
+          mvn clean package \
+          -DskipTests \
+          -Dspring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
