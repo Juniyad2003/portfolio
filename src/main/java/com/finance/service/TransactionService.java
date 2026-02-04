@@ -44,4 +44,9 @@ public class TransactionService {
         transactionRepo.deleteById(id);
         return transaction;
     }
+
+    public org.springframework.data.domain.Page<Transaction> findTransactionsByPortfolioId(int portfolioId,
+                                                                                           org.springframework.data.domain.Pageable pageable) {
+        return transactionRepo.findByAsset_Portfolio_Id(portfolioId, pageable);
+    }
 }

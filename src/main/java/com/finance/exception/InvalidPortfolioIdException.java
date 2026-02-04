@@ -2,8 +2,7 @@ package com.finance.exception;
 
 public class InvalidPortfolioIdException extends Exception {
 
-    public InvalidPortfolioIdException() {
-    }
+    public InvalidPortfolioIdException() {}
 
     public InvalidPortfolioIdException(String message) {
         super(message);

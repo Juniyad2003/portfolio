@@ -20,8 +20,10 @@ public class Investor {
     String name;
     String email;
 
-    String investmentGoal;   // SHORT_TERM, LONG_TERM, RETIREMENT
-    String riskPreference;   // LOW, MEDIUM, HIGH
+    String investmentGoal; // SHORT_TERM, LONG_TERM, RETIREMENT
+    String riskPreference; // LOW, MEDIUM, HIGH
+
+    String profilePicUrl;
 
     LocalDateTime createdAt;
 
@@ -30,23 +32,25 @@ public class Investor {
     }
 
     public Investor(int id, String name, String email,
-                    String investmentGoal, String riskPreference) {
+                    String investmentGoal, String riskPreference, String profilePicUrl) {
         super();
         this.id = id;
         this.name = name;
         this.email = email;
         this.investmentGoal = investmentGoal;
         this.riskPreference = riskPreference;
+        this.profilePicUrl = profilePicUrl;
         this.createdAt = LocalDateTime.now();
     }
 
     public Investor(String name, String email,
-                    String investmentGoal, String riskPreference) {
+                    String investmentGoal, String riskPreference, String profilePicUrl) {
         super();
         this.name = name;
         this.email = email;
         this.investmentGoal = investmentGoal;
         this.riskPreference = riskPreference;
+        this.profilePicUrl = profilePicUrl;
         this.createdAt = LocalDateTime.now();
     }
 
@@ -90,6 +94,14 @@ public class Investor {
         this.riskPreference = riskPreference;
     }
 
+    public String getProfilePicUrl() {
+        return profilePicUrl;
+    }
+
+    public void setProfilePicUrl(String profilePicUrl) {
+        this.profilePicUrl = profilePicUrl;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -98,8 +110,8 @@ public class Investor {
     public String toString() {
         return "Investor [id=" + id + ", name=" + name + ", email=" + email +
                 ", investmentGoal=" + investmentGoal +
-                ", riskPreference=" + riskPreference + "]";
+                ", riskPreference=" + riskPreference +
+                ", profilePicUrl=" + profilePicUrl + "]";
     }
-
 
 }
