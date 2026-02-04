@@ -142,4 +142,87 @@ public class PortfolioController {
 
         return new ResponseEntity<>(history, HttpStatus.OK);
     }
+
+    @GetMapping("/stats/profit-by-type")
+    public ResponseEntity<java.util.Map<String, Double>> getTotalProfitByAssetType() {
+        List<Portfolio> portfolios = portfolioService.findAllPortfolios();
+        java.util.Map<String, Double> profitByType = new java.util.HashMap<>();
+
+        // Initialize known types with 0.0 to ensure they appear even if empty
+        profitByType.put("STOCK", 0.0);
+        profitByType.put("CRYPTO", 0.0);
+        profitByType.put("ETF", 0.0);
+        profitByType.put("MUTUAL_FUND", 0.0);
+
+        for (Portfolio p : portfolios) {
+            List<Asset> assets = assetService.findAllAssetsByPortfolioId(p.getId());
+            for (Asset a : assets) {
+                String type = a.getAssetType();
+                if (type == null)
+                    continue;
+
+                // Normalizing type to uppercase to avoid mismatch
+                type = type.toUpperCase();
+
+                double profit = (a.getCurrentAmount() - a.getInvestedAmount());
+                profitByType.put(type, profitByType.getOrDefault(type, 0.0) + profit);
+            }
+        }
+        return new ResponseEntity<>(profitByType, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/stats/profit-by-type")
+    public ResponseEntity<java.util.Map<String, Double>> getProfitByAssetTypeForPortfolio(@PathVariable int id)
+            throws InvalidPortfolioIdException {
+
+        // Ensure portfolio exists
+        portfolioService.findPortfolioById(id);
+
+        java.util.Map<String, Double> profitByType = new java.util.HashMap<>();
+        // Initialize known types
+        profitByType.put("STOCK", 0.0);
+        profitByType.put("CRYPTO", 0.0);
+        profitByType.put("ETF", 0.0);
+        profitByType.put("MUTUAL_FUND", 0.0);
+
+        List<Asset> assets = assetService.findAllAssetsByPortfolioId(id);
+        for (Asset a : assets) {
+            String type = a.getAssetType();
+            if (type == null)
+                continue;
+
+            type = type.toUpperCase();
+            double profit = (a.getCurrentAmount() - a.getInvestedAmount());
+            profitByType.put(type, profitByType.getOrDefault(type, 0.0) + profit);
+        }
+
+        return new ResponseEntity<>(profitByType, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/stats/value-by-type")
+    public ResponseEntity<java.util.Map<String, Double>> getValueByAssetTypeForPortfolio(@PathVariable int id)
+            throws InvalidPortfolioIdException {
+
+        // Ensure portfolio exists
+        portfolioService.findPortfolioById(id);
+
+        java.util.Map<String, Double> valueByType = new java.util.HashMap<>();
+        // Initialize known types
+        valueByType.put("STOCK", 0.0);
+        valueByType.put("CRYPTO", 0.0);
+        valueByType.put("ETF", 0.0);
+        valueByType.put("MUTUAL_FUND", 0.0);
+
+        List<Asset> assets = assetService.findAllAssetsByPortfolioId(id);
+        for (Asset a : assets) {
+            String type = a.getAssetType();
+            if (type == null)
+                continue;
+
+            type = type.toUpperCase();
+            valueByType.put(type, valueByType.getOrDefault(type, 0.0) + a.getCurrentAmount());
+        }
+
+        return new ResponseEntity<>(valueByType, HttpStatus.OK);
+    }
 }

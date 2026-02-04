@@ -69,45 +69,76 @@
                 </div>
 
                 <div class="transaction-history-section" style="margin-top: 3rem;">
-                    <div style="margin-bottom: 2rem; display: none;" id="chart-section">
-                        <h2 style="margin-bottom: 1rem; font-size: 1.5rem;">Performance Analysis</h2>
-                        <div
-                            style="background: var(--bg-panel); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border); height: 400px;">
-                            <canvas id="performanceChart"></canvas>
+                    <div class="transaction-history-section" style="margin-top: 3rem;">
+                        <div style="margin-bottom: 2rem; display: none;" id="chart-section">
+                            <div class="charts-container"
+                                style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; align-items: start;">
+
+                                <!-- Performance Chart -->
+                                <div class="chart-box">
+                                    <h2 style="margin-bottom: 1rem; font-size: 1.5rem;">Performance Analysis</h2>
+                                    <div
+                                        style="background: var(--bg-panel); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border); height: 400px;">
+                                        <canvas id="performanceChart"></canvas>
+                                    </div>
+                                </div>
+
+                                <!-- Allocation Pie Chart -->
+                                <div class="chart-box">
+                                    <h2 style="margin-bottom: 1rem; font-size: 1.5rem;">Asset Allocation</h2>
+                                    <div
+                                        style="background: var(--bg-panel); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border); height: 400px; display: flex; align-items: center; justify-content: center;">
+                                        <canvas id="allocationChart"></canvas>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div id="portfolio-asset-stats" style="margin-bottom: 2rem; display: none;">
+                            <h2 style="margin-bottom: 1rem; font-size: 1.5rem;">Profit by Asset Type</h2>
+                            <div class="stats-grid" id="portfolio-asset-profit-grid"
+                                style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                                <div class="loading-spinner"><i class="fa-solid fa-spinner fa-spin"></i> Loading
+                                    stats...
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Transaction History</h2>
+                        <div class="table-container"
+                            style="background: var(--bg-panel); border-radius: var(--radius-md); border: 1px solid var(--border); overflow: hidden;">
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr
+                                        style="background: var(--bg-hover); color: var(--text-muted); text-align: left;">
+                                        <th style="padding: 1rem;">Date</th>
+                                        <th style="padding: 1rem;">Type</th>
+                                        <th style="padding: 1rem;">Symbol</th>
+                                        <th style="padding: 1rem;">Quantity</th>
+                                        <th style="padding: 1rem;">Price</th>
+                                        <th style="padding: 1rem;">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="transaction-table-body">
+                                    <tr>
+                                        <td colspan="6"
+                                            style="padding: 2rem; text-align: center; color: var(--text-muted);">Select
+                                            a
+                                            portfolio to view history</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="pagination-controls"
+                            style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1rem;">
+                            <button id="prev-page-btn" class="btn secondary-btn" disabled><i
+                                    class="fa-solid fa-chevron-left"></i> Previous</button>
+                            <button id="next-page-btn" class="btn secondary-btn" disabled>Next <i
+                                    class="fa-solid fa-chevron-right"></i></button>
                         </div>
                     </div>
-                    <h2 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Transaction History</h2>
-                    <div class="table-container"
-                        style="background: var(--bg-panel); border-radius: var(--radius-md); border: 1px solid var(--border); overflow: hidden;">
-                        <table style="width: 100%; border-collapse: collapse;">
-                            <thead>
-                                <tr style="background: var(--bg-hover); color: var(--text-muted); text-align: left;">
-                                    <th style="padding: 1rem;">Date</th>
-                                    <th style="padding: 1rem;">Type</th>
-                                    <th style="padding: 1rem;">Symbol</th>
-                                    <th style="padding: 1rem;">Quantity</th>
-                                    <th style="padding: 1rem;">Price</th>
-                                    <th style="padding: 1rem;">Total</th>
-                                </tr>
-                            </thead>
-                            <tbody id="transaction-table-body">
-                                <tr>
-                                    <td colspan="6"
-                                        style="padding: 2rem; text-align: center; color: var(--text-muted);">Select a
-                                        portfolio to view history</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="pagination-controls"
-                        style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1rem;">
-                        <button id="prev-page-btn" class="btn secondary-btn" disabled><i
-                                class="fa-solid fa-chevron-left"></i> Previous</button>
-                        <button id="next-page-btn" class="btn secondary-btn" disabled>Next <i
-                                class="fa-solid fa-chevron-right"></i></button>
-                    </div>
                 </div>
-            </div>
         </main>
     </div>
 

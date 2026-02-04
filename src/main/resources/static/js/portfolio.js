@@ -157,9 +157,65 @@ async function loadTransactionHistory(portfolioId, page = 0) {
         // Load Chart
         loadPortfolioPerformance(portfolioId);
 
+        // Load Asset Stats
+        loadAssetStatsForPortfolio(portfolioId);
+
+        // Load Allocation Chart
+        loadAssetAllocationChart(portfolioId);
+
     } catch (error) {
         console.error("Error loading history", error);
         tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--danger); padding: 1rem;">Failed to load history.</td></tr>';
+    }
+}
+
+async function loadAssetStatsForPortfolio(portfolioId) {
+    const container = document.getElementById('portfolio-asset-stats');
+    const grid = document.getElementById('portfolio-asset-profit-grid');
+
+    if (!container || !grid) return;
+
+    container.style.display = 'block';
+
+    try {
+        const response = await axios.get(`/portfolios/${portfolioId}/stats/profit-by-type`);
+        const stats = response.data;
+
+        if (!stats || Object.keys(stats).length === 0) {
+            grid.innerHTML = '<p class="text-muted">No asset data available.</p>';
+            return;
+        }
+
+        const typeConfig = {
+            'STOCK': { icon: 'fa-chart-pie', color: 'blue', label: 'Stocks' },
+            'CRYPTO': { icon: 'fa-coins', color: 'orange', label: 'Crypto' },
+            'ETF': { icon: 'fa-layer-group', color: 'purple', label: 'ETFs' },
+            'MUTUAL_FUND': { icon: 'fa-piggy-bank', color: 'green', label: 'Mutual Funds' }
+        };
+
+        grid.innerHTML = Object.entries(stats).map(([type, profit]) => {
+            const config = typeConfig[type] || { icon: 'fa-box', color: 'gray', label: type };
+            const isProfit = profit >= 0;
+            const profitText = (isProfit ? '+' : '') + '$' + profit.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            const trendClass = isProfit ? 'trend up' : 'trend down';
+
+            const colorStyle = config.color === 'orange' ? 'color: #f59e0b; background: rgba(245, 158, 11, 0.1);' : '';
+            const iconClass = config.color !== 'orange' ? `icon-box ${config.color}` : 'icon-box';
+
+            return `
+            <div class="stat-card">
+                <div class="${iconClass}" style="${colorStyle}"><i class="fa-solid ${config.icon}"></i></div>
+                <div class="stat-info">
+                    <span class="label">${config.label}</span>
+                    <span class="value" style="font-size: 1.2rem;">${profitText}</span>
+                </div>
+            </div>
+            `;
+        }).join('');
+
+    } catch (error) {
+        console.error('Failed to load asset stats:', error);
+        grid.innerHTML = '<p class="text-danger">Failed to load stats.</p>';
     }
 }
 
@@ -248,6 +304,80 @@ async function loadPortfolioPerformance(portfolioId) {
     } catch (error) {
         console.error("Error loading performance chart", error);
         chartSection.style.display = 'none';
+    }
+}
+
+let allocationChart = null;
+
+async function loadAssetAllocationChart(portfolioId) {
+    try {
+        const response = await axios.get(`/portfolios/${portfolioId}/stats/value-by-type`);
+        const stats = response.data; // Map<String, Double>
+
+        if (!stats) return;
+
+        const ctx = document.getElementById('allocationChart').getContext('2d');
+
+        if (allocationChart) {
+            allocationChart.destroy();
+        }
+
+        // colors for Types
+        const typeColors = {
+            'STOCK': '#3b82f6', // blue
+            'CRYPTO': '#f97316', // orange
+            'ETF': '#a855f7', // purple
+            'MUTUAL_FUND': '#22c55e' // green
+        };
+
+        const labels = Object.keys(stats);
+        const data = Object.values(stats);
+        const bgColors = labels.map(l => typeColors[l] || '#94a3b8');
+
+        allocationChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: data,
+                    backgroundColor: bgColors,
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#94a3b8',
+                            usePointStyle: true,
+                            padding: 20
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                    label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(context.parsed);
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                },
+                cutout: '70%',
+            }
+        });
+
+    } catch (error) {
+        console.error("Error loading allocation chart", error);
     }
 }
 
