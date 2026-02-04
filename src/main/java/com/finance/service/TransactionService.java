@@ -8,9 +8,12 @@ import org.springframework.stereotype.Service;
 import com.finance.entity.Transaction;
 import com.finance.exception.InvalidTransactionIdException;
 import com.finance.repo.TransactionRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class TransactionService {
+    private static final Logger log = LoggerFactory.getLogger(TransactionService.class);
 
     private TransactionRepo transactionRepo;
 
@@ -19,6 +22,7 @@ public class TransactionService {
     }
 
     public Transaction saveTransaction(Transaction transaction) {
+        log.info("Saving Transaction | type={},amount={}",transaction.getTransactionType(),transaction.getAmount());
         return transactionRepo.save(transaction);
     }
 

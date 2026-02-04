@@ -11,11 +11,14 @@ import com.finance.entity.Asset;
 import com.finance.exception.InvalidPortfolioIdException;
 import com.finance.service.PortfolioService;
 import com.finance.service.AssetService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping("/portfolios")
 public class PortfolioController {
 
+    private static final Logger log = LoggerFactory.getLogger(PortfolioController.class);
     PortfolioService portfolioService;
     AssetService assetService;
 
@@ -26,8 +29,8 @@ public class PortfolioController {
 
     @GetMapping("")
     public ResponseEntity<List<Portfolio>> getAllPortfolios() {
+        log.info("GET /portfolios");
         List<Portfolio> portfolios = portfolioService.findAllPortfolios();
-
         // Recalculate portfolio values from assets to ensure accuracy
         for (Portfolio portfolio : portfolios) {
             List<Asset> assets = assetService.findAllAssetsByPortfolioId(portfolio.getId());
@@ -46,7 +49,7 @@ public class PortfolioController {
     @GetMapping("/{id}")
     public ResponseEntity<Portfolio> getPortfolioById(@PathVariable int id)
             throws InvalidPortfolioIdException {
-
+        log.info("Get /PortfolioById: {}",id);
         Portfolio portfolio = portfolioService.findPortfolioById(id);
         return new ResponseEntity<>(portfolio, HttpStatus.OK);
     }
@@ -69,6 +72,7 @@ public class PortfolioController {
 
     @PostMapping("")
     public ResponseEntity<Portfolio> savePortfolio(@RequestBody Portfolio portfolio) {
+        log.info("POST /porfolios | name={}",portfolio.getPortfolioName());
         Portfolio saved = portfolioService.savePortfolio(portfolio);
         return new ResponseEntity<>(saved, HttpStatus.OK);
     }

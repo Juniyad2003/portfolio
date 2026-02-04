@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import com.finance.entity.Transaction;
 import com.finance.exception.InvalidTransactionIdException;
 import com.finance.service.TransactionService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping("/transactions")
@@ -17,6 +19,7 @@ public class TransactionController {
 
     TransactionService transactionService;
     com.finance.service.PortfolioService portfolioService;
+    private static final Logger log = LoggerFactory.getLogger(TransactionController.class);
 
     @Autowired
     public TransactionController(TransactionService transactionService,
@@ -75,6 +78,7 @@ public class TransactionController {
 
     @PostMapping("/buy")
     public ResponseEntity<?> buyStock(@RequestBody TradeRequest request) {
+        log.info("BUY Request | portfolo={},symbol={},qty={}",request.getPortfolioId(),request.getSymbol(),request.getQuantity());
         try {
             String assetType = request.getAssetType() != null ? request.getAssetType() : "STOCK";
             System.out.println("Processing BUY request: " + request.getSymbol() + " (" + request.getQuantity()
@@ -91,6 +95,7 @@ public class TransactionController {
 
     @PostMapping("/sell")
     public ResponseEntity<?> sellStock(@RequestBody TradeRequest request) {
+        log.info("SELL Request | portfolo={},symbol={},qty={}",request.getPortfolioId(),request.getSymbol(),request.getQuantity());
         try {
             String assetType = request.getAssetType() != null ? request.getAssetType() : "STOCK";
             System.out.println("Processing SELL request: " + request.getSymbol() + " (" + request.getQuantity()

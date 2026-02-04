@@ -9,10 +9,13 @@ import org.springframework.stereotype.Service;
 import com.finance.entity.Portfolio;
 import com.finance.exception.InvalidPortfolioIdException;
 import com.finance.repo.PortfolioRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class PortfolioService {
 
+    private static final Logger log = LoggerFactory.getLogger(PortfolioService.class);
     private PortfolioRepo portfolioRepo;
     private com.finance.repo.AssetRepo assetRepo;
     private com.finance.repo.TransactionRepo transactionRepo;
@@ -30,6 +33,7 @@ public class PortfolioService {
     }
 
     public Portfolio findPortfolioById(int id) throws InvalidPortfolioIdException {
+        log.info("Finding Portfolio | id ={}",id);
         Optional<Portfolio> opt = portfolioRepo.findById(id);
         if (opt.isEmpty()) {
             throw new InvalidPortfolioIdException("Portfolio ID " + id + " is not valid");
@@ -54,6 +58,7 @@ public class PortfolioService {
 
     public void buyStock(int portfolioId, String symbol, double quantity, double price, String assetType)
             throws InvalidPortfolioIdException {
+        log.info("BUY | portfolio={},symbol={},qty={}",portfolioId,symbol,quantity);
         System.out.println("Searching for portfolio ID: " + portfolioId);
         System.out.println("Asset Type received: " + assetType);
         Portfolio portfolio = findPortfolioById(portfolioId);
@@ -110,6 +115,8 @@ public class PortfolioService {
 
     public void sellStock(int portfolioId, String symbol, double quantity, double price, String assetType)
             throws InvalidPortfolioIdException {
+        log.info("SELL | portfolio={},symbol={},qty={}",portfolioId,symbol,quantity);
+
         System.out.println("Searching for portfolio ID: " + portfolioId + " to SELL " + symbol);
         Portfolio portfolio = findPortfolioById(portfolioId);
 

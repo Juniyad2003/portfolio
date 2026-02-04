@@ -1,0 +1,119 @@
+2026-02-04T16:08:14.293Z  INFO 5820 --- [portfolio] [main] com.finance.PortfolioApplication         : Starting PortfolioApplication using Java 22.0.2 with PID 5820 (C:\Users\Administrator\Portfolio_ManagerP\portfolio\target\classes started by Administrator in C:\Users\Administrator\Portfolio_ManagerP\portfolio)
+2026-02-04T16:08:14.296Z DEBUG 5820 --- [portfolio] [main] com.finance.PortfolioApplication         : Running with Spring Boot v3.5.10, Spring v6.2.15
+2026-02-04T16:08:14.299Z  INFO 5820 --- [portfolio] [main] com.finance.PortfolioApplication         : No active profile set, falling back to 1 default profile: "default"
+2026-02-04T16:08:16.615Z  INFO 5820 --- [portfolio] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-04T16:08:16.788Z  INFO 5820 --- [portfolio] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 150 ms. Found 4 JPA repository interfaces.
+2026-02-04T16:08:18.337Z  INFO 5820 --- [portfolio] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-02-04T16:08:18.369Z  INFO 5820 --- [portfolio] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-02-04T16:08:18.370Z  INFO 5820 --- [portfolio] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.50]
+2026-02-04T16:08:18.489Z  INFO 5820 --- [portfolio] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-02-04T16:08:18.490Z  INFO 5820 --- [portfolio] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3978 ms
+2026-02-04T16:08:18.885Z  INFO 5820 --- [portfolio] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-04T16:08:19.046Z  INFO 5820 --- [portfolio] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.41.Final
+2026-02-04T16:08:19.125Z  INFO 5820 --- [portfolio] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-02-04T16:08:19.918Z  INFO 5820 --- [portfolio] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-04T16:08:19.991Z  INFO 5820 --- [portfolio] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-02-04T16:08:20.407Z  INFO 5820 --- [portfolio] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2404abe2
+2026-02-04T16:08:20.411Z  INFO 5820 --- [portfolio] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-02-04T16:08:20.527Z  WARN 5820 --- [portfolio] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-04T16:08:20.580Z  INFO 5820 --- [portfolio] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-02-04T16:08:22.975Z  INFO 5820 --- [portfolio] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-04T16:08:23.245Z  INFO 5820 --- [portfolio] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-04T16:08:24.843Z  WARN 5820 --- [portfolio] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-04T16:08:24.891Z  INFO 5820 --- [portfolio] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2026-02-04T16:08:24.963Z  INFO 5820 --- [portfolio] [main] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2026-02-04T16:08:25.902Z  INFO 5820 --- [portfolio] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-02-04T16:08:25.923Z  INFO 5820 --- [portfolio] [main] com.finance.PortfolioApplication         : Started PortfolioApplication in 13.01 seconds (process running for 14.393)
+2026-02-04T16:11:53.672Z  INFO 5820 --- [portfolio] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-04T16:11:53.673Z  INFO 5820 --- [portfolio] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-02-04T16:11:53.677Z  INFO 5820 --- [portfolio] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2026-02-04T16:12:29.692Z  WARN 5820 --- [portfolio] [http-nio-8080-exec-2] ration$PageModule$WarningLoggingModifier : Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2026-02-04T16:16:36.537Z  INFO 5820 --- [portfolio] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-02-04T16:16:36.545Z  INFO 5820 --- [portfolio] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2026-02-04T16:16:36.553Z  INFO 5820 --- [portfolio] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-02-04T16:16:36.560Z  INFO 5820 --- [portfolio] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-02-04T16:16:36.571Z  INFO 5820 --- [portfolio] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-02-04T17:07:54.478Z  INFO 11652 --- [portfolio] [main] com.finance.PortfolioApplication         : Starting PortfolioApplication using Java 22.0.2 with PID 11652 (C:\Users\Administrator\Portfolio_ManagerP\portfolio\target\classes started by Administrator in C:\Users\Administrator\Portfolio_ManagerP\portfolio)
+2026-02-04T17:07:54.481Z DEBUG 11652 --- [portfolio] [main] com.finance.PortfolioApplication         : Running with Spring Boot v3.5.10, Spring v6.2.15
+2026-02-04T17:07:54.483Z  INFO 11652 --- [portfolio] [main] com.finance.PortfolioApplication         : No active profile set, falling back to 1 default profile: "default"
+2026-02-04T17:07:56.476Z  INFO 11652 --- [portfolio] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-04T17:07:56.627Z  INFO 11652 --- [portfolio] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 131 ms. Found 4 JPA repository interfaces.
+2026-02-04T17:07:57.638Z  INFO 11652 --- [portfolio] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-02-04T17:07:57.666Z  INFO 11652 --- [portfolio] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-02-04T17:07:57.667Z  INFO 11652 --- [portfolio] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.50]
+2026-02-04T17:07:57.802Z  INFO 11652 --- [portfolio] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-02-04T17:07:57.803Z  INFO 11652 --- [portfolio] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2985 ms
+2026-02-04T17:07:58.233Z  INFO 11652 --- [portfolio] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-04T17:07:58.334Z  INFO 11652 --- [portfolio] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.41.Final
+2026-02-04T17:07:58.403Z  INFO 11652 --- [portfolio] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-02-04T17:07:59.055Z  INFO 11652 --- [portfolio] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-04T17:07:59.110Z  INFO 11652 --- [portfolio] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-02-04T17:07:59.464Z  INFO 11652 --- [portfolio] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6a4a2090
+2026-02-04T17:07:59.468Z  INFO 11652 --- [portfolio] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-02-04T17:07:59.572Z  WARN 11652 --- [portfolio] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-04T17:07:59.607Z  INFO 11652 --- [portfolio] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-02-04T17:08:01.494Z  INFO 11652 --- [portfolio] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-04T17:08:01.647Z  INFO 11652 --- [portfolio] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-04T17:08:02.887Z  WARN 11652 --- [portfolio] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-04T17:08:02.926Z  INFO 11652 --- [portfolio] [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2026-02-04T17:08:02.970Z  INFO 11652 --- [portfolio] [main] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2026-02-04T17:08:03.892Z  INFO 11652 --- [portfolio] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-02-04T17:08:03.914Z  INFO 11652 --- [portfolio] [main] com.finance.PortfolioApplication         : Started PortfolioApplication in 10.477 seconds (process running for 11.255)
+2026-02-04T17:08:34.490Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-04T17:08:34.496Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-02-04T17:08:34.500Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2026-02-04T17:08:36.396Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-8] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 1207 ms
+2026-02-04T17:09:09.348Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-2] c.f.controller.PortfolioController       : GET /portfolios
+2026-02-04T17:09:09.773Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-2] com.finance.service.PortfolioService     : Finding Portfolio | id =1
+2026-02-04T17:09:09.833Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-2] com.finance.service.PortfolioService     : Finding Portfolio | id =52
+2026-02-04T17:09:13.820Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-7] c.f.controller.PortfolioController       : GET /portfolios
+2026-02-04T17:09:13.836Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-7] com.finance.service.PortfolioService     : Finding Portfolio | id =1
+2026-02-04T17:09:13.854Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-7] com.finance.service.PortfolioService     : Finding Portfolio | id =52
+2026-02-04T17:09:15.730Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-10] c.f.controller.PortfolioController       : GET /portfolios
+2026-02-04T17:09:15.752Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-10] com.finance.service.PortfolioService     : Finding Portfolio | id =1
+2026-02-04T17:09:15.768Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-10] com.finance.service.PortfolioService     : Finding Portfolio | id =52
+2026-02-04T17:09:31.490Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-3] c.f.controller.PortfolioController       : POST /porfolios | name=Chirag Portfolio
+2026-02-04T17:09:33.301Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-1] c.f.controller.PortfolioController       : GET /portfolios
+2026-02-04T17:09:33.319Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-1] com.finance.service.PortfolioService     : Finding Portfolio | id =1
+2026-02-04T17:09:33.331Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-1] com.finance.service.PortfolioService     : Finding Portfolio | id =52
+2026-02-04T17:09:33.346Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-1] com.finance.service.PortfolioService     : Finding Portfolio | id =102
+2026-02-04T17:09:38.179Z  WARN 11652 --- [portfolio] [http-nio-8080-exec-6] ration$PageModule$WarningLoggingModifier : Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2026-02-04T17:09:40.904Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-4] c.f.controller.PortfolioController       : GET /portfolios
+2026-02-04T17:09:40.922Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-4] com.finance.service.PortfolioService     : Finding Portfolio | id =1
+2026-02-04T17:09:40.932Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-4] com.finance.service.PortfolioService     : Finding Portfolio | id =52
+2026-02-04T17:09:40.946Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-4] com.finance.service.PortfolioService     : Finding Portfolio | id =102
+2026-02-04T17:09:54.986Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-7] c.f.controller.TransactionController     : BUY Request | portfolo=102,symbol=AAPL,qty=10.0
+2026-02-04T17:09:54.992Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-7] com.finance.service.PortfolioService     : BUY | portfolio=102,symbol=AAPL,qty=10.0
+2026-02-04T17:09:54.993Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-7] com.finance.service.PortfolioService     : Finding Portfolio | id =102
+2026-02-04T17:10:00.078Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-9] c.f.controller.PortfolioController       : GET /portfolios
+2026-02-04T17:10:00.100Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-9] com.finance.service.PortfolioService     : Finding Portfolio | id =1
+2026-02-04T17:10:00.115Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-9] com.finance.service.PortfolioService     : Finding Portfolio | id =52
+2026-02-04T17:10:00.130Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-9] com.finance.service.PortfolioService     : Finding Portfolio | id =102
+2026-02-04T17:10:09.180Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-3] c.f.controller.PortfolioController       : GET /portfolios
+2026-02-04T17:10:09.199Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-3] com.finance.service.PortfolioService     : Finding Portfolio | id =1
+2026-02-04T17:10:09.213Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-3] com.finance.service.PortfolioService     : Finding Portfolio | id =52
+2026-02-04T17:10:09.242Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-3] com.finance.service.PortfolioService     : Finding Portfolio | id =102
+2026-02-04T17:10:10.795Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-5] c.f.controller.PortfolioController       : GET /portfolios
+2026-02-04T17:10:10.811Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-5] com.finance.service.PortfolioService     : Finding Portfolio | id =1
+2026-02-04T17:10:10.825Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-5] com.finance.service.PortfolioService     : Finding Portfolio | id =52
+2026-02-04T17:10:10.843Z  INFO 11652 --- [portfolio] [http-nio-8080-exec-5] com.finance.service.PortfolioService     : Finding Portfolio | id =102

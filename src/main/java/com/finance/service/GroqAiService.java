@@ -4,12 +4,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class GroqAiService {
 
     @Value("${groq.api-key}")
     private String apiKey;
+    private static final Logger log = LoggerFactory.getLogger(GroqAiService.class);
 
     private RestTemplate restTemplate;
 
@@ -24,7 +27,7 @@ public class GroqAiService {
     }
 
     public String askAi(String question) {
-
+        log.info("Calling Groq AI");
         String url = "https://api.groq.com/openai/v1/chat/completions";
 
         HttpHeaders headers = new HttpHeaders();
@@ -51,6 +54,7 @@ public class GroqAiService {
         try {
             body = mapper.writeValueAsString(root);
         } catch (com.fasterxml.jackson.core.JsonProcessingException e) {
+            log.error("Groq AI error");
             return "Error creating JSON: " + e.getMessage();
         }
 

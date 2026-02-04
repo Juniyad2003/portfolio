@@ -9,9 +9,12 @@ import com.finance.entity.Asset;
 import com.finance.entity.Portfolio;
 import com.finance.exception.InvalidAssetIdException;
 import com.finance.repo.AssetRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class AssetService {
+    private static final Logger log = LoggerFactory.getLogger(AssetService.class);
 
     private AssetRepo assetRepo;
 
@@ -20,6 +23,7 @@ public class AssetService {
     }
 
     public Asset saveAsset(Asset asset) {
+        log.info("Saving asset | name={},qty={}",asset.getAssetName(),asset.getQuantity());
         Asset savedAsset = assetRepo.save(asset);
         System.out.println("Saved asset : " + savedAsset);
         return savedAsset;
@@ -29,12 +33,12 @@ public class AssetService {
         return assetRepo.findAllByPortfolio(portfolio);
     }
 
-    public org.springframework.data.domain.Page<Asset> findAssetsByPortfolioId(int portfolioId,
-                                                                               org.springframework.data.domain.Pageable pageable) {
+    public org.springframework.data.domain.Page<Asset> findAssetsByPortfolioId(int portfolioId, org.springframework.data.domain.Pageable pageable) {
         return assetRepo.findByPortfolio_Id(portfolioId, pageable);
     }
 
     public List<Asset> findAllAssetsByPortfolioId(int portfolioId) {
+
         return assetRepo.findByPortfolio_Id(portfolioId, org.springframework.data.domain.Pageable.unpaged())
                 .getContent();
     }
@@ -44,6 +48,7 @@ public class AssetService {
     }
 
     public Asset findAssetById(int id) throws InvalidAssetIdException {
+        log.info("Finding asset | id={}",id);
         Optional<Asset> opt = assetRepo.findById(id);
         if (opt.isEmpty()) {
             throw new InvalidAssetIdException("Asset ID " + id + " is not valid");
@@ -57,6 +62,7 @@ public class AssetService {
     }
 
     public Asset deleteAsset(int id) throws InvalidAssetIdException {
+        log.warn("Asset Deleted | id ={}",id);
         Asset asset = findAssetById(id);
         assetRepo.deleteById(id);
         return asset;

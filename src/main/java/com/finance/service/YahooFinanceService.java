@@ -8,9 +8,12 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class YahooFinanceService {
+    private static final Logger log = LoggerFactory.getLogger(YahooFinanceService.class);
 
     @Value("${rapidapi.key}")
     private String rapidApiKey;
@@ -25,6 +28,7 @@ public class YahooFinanceService {
     }
 
     public String getStock(String symbol) throws IOException, InterruptedException {
+        log.info("Fetching Mock Data");
         /*
          * try {
          * HttpRequest request = HttpRequest.newBuilder()

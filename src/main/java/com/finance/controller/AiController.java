@@ -4,10 +4,14 @@ import com.finance.service.GroqAiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.MediaType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping("/api/ai")
 public class AiController {
+
+    private static final Logger log = LoggerFactory.getLogger(AiController.class);
 
     @Autowired
     GroqAiService aiService;
@@ -17,11 +21,13 @@ public class AiController {
 
     @PostMapping(value = "/chat", consumes = MediaType.TEXT_PLAIN_VALUE)
     public String chat(@RequestBody String question) {
+        log.info("AI Chat request received | length={}", question.length());
         return aiService.askAi(question);
     }
 
     @GetMapping("/analyze-portfolio/{portfolioId}")
     public String analyzePortfolio(@PathVariable int portfolioId) {
+        log.info("AI Portfolio analysis requested | portfolioId={}", portfolioId);
         try {
             com.finance.entity.Portfolio portfolio = portfolioService.findPortfolioById(portfolioId);
             StringBuilder prompt = new StringBuilder(
@@ -45,6 +51,7 @@ public class AiController {
 
             return aiService.askAi(prompt.toString());
         } catch (Exception e) {
+            log.error("AI Portfolio analysis failed | portfolioId={}", portfolioId, e);
             return "Error: " + e.getMessage();
         }
     }
