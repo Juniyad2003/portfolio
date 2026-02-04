@@ -13,108 +13,108 @@
 </head>
 
 <body>
-<div class="app-container">
-    <aside class="sidebar">
+    <div class="app-container">
+        <aside class="sidebar">
 
-        <nav class="nav-menu">
-            <a href="index.html" class="nav-item">
-                <i class="fa-solid fa-house"></i>
-                <span>Dashboard</span>
-            </a>
-            <a href="market.html" class="nav-item">
-                <i class="fa-solid fa-magnifying-glass-dollar"></i>
-                <span>Market Data</span>
-            </a>
-            <a href="portfolio.html" class="nav-item active">
-                <i class="fa-solid fa-briefcase"></i>
-                <span>Portfolios</span>
-            </a>
-            <a href="ai-chat.html" class="nav-item">
-                <i class="fa-solid fa-robot"></i>
-                <span>AI Assistant</span>
-            </a>
-        </nav>
-        <div class="user-profile">
-            <div class="avatar">U</div>
-            <div class="user-info">
-                <span class="name">User</span>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-item">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="market.html" class="nav-item">
+                    <i class="fa-solid fa-magnifying-glass-dollar"></i>
+                    <span>Market Data</span>
+                </a>
+                <a href="portfolio.html" class="nav-item active">
+                    <i class="fa-solid fa-briefcase"></i>
+                    <span>Portfolios</span>
+                </a>
+                <a href="ai-chat.html" class="nav-item">
+                    <i class="fa-solid fa-robot"></i>
+                    <span>AI Assistant</span>
+                </a>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar">U</div>
+                <div class="user-info">
+                    <span class="name">User</span>
+                </div>
             </div>
-        </div>
-    </aside>
+        </aside>
 
-    <main class="main-content">
-        <header class="app-header-center">
-            <div class="logo-container">
-                <i class="fa-solid fa-chart-line brand-gradient"
-                   style="font-size: 2.5rem; -webkit-text-fill-color: initial; background: none; color: #6366f1;"></i>
-                <h1 class="brand-gradient">FinTrack</h1>
-            </div>
-            <div class="slogan">Track It; Grow It; Own It</div>
-        </header>
+        <main class="main-content">
+            <header class="app-header-center">
+                <div class="logo-container">
+                    <i class="fa-solid fa-chart-line brand-gradient"
+                        style="font-size: 2.5rem; -webkit-text-fill-color: initial; background: none; color: #6366f1;"></i>
+                    <h1 class="brand-gradient">FinTrack</h1>
+                </div>
+                <div class="slogan">Track It; Grow It; Own It</div>
+            </header>
 
-        <header class="top-bar">
-            <h1 id="page-title">My Portfolios</h1>
-            <div class="actions">
-                <button class="btn secondary-btn" id="analyze-btn" style="display: none;"
+            <header class="top-bar">
+                <h1 id="page-title">My Portfolios</h1>
+                <div class="actions">
+                    <button class="btn secondary-btn" id="analyze-btn" style="display: none;"
                         onclick="analyzeCurrentPortfolio()"><i class="fa-solid fa-wand-magic-sparkles"></i> Analyze
-                    AI</button>
-                <button class="btn primary-btn" onclick="createPortfolio()"><i class="fa-solid fa-plus"></i> New
-                    Portfolio</button>
-            </div>
-        </header>
+                        AI</button>
+                    <button class="btn primary-btn" onclick="createPortfolio()"><i class="fa-solid fa-plus"></i> New
+                        Portfolio</button>
+                </div>
+            </header>
 
-        <div class="content-section">
-            <div id="portfolio-list" class="portfolio-grid">
-                <div class="loading-spinner"><i class="fa-solid fa-spinner fa-spin"></i> Loading...</div>
-            </div>
+            <div class="content-section">
+                <div id="portfolio-list" class="portfolio-grid">
+                    <div class="loading-spinner"><i class="fa-solid fa-spinner fa-spin"></i> Loading...</div>
+                </div>
 
-            <div class="transaction-history-section" style="margin-top: 3rem;">
-                <div style="margin-bottom: 2rem; display: none;" id="chart-section">
-                    <h2 style="margin-bottom: 1rem; font-size: 1.5rem;">Performance Analysis</h2>
-                    <div
+                <div class="transaction-history-section" style="margin-top: 3rem;">
+                    <div style="margin-bottom: 2rem; display: none;" id="chart-section">
+                        <h2 style="margin-bottom: 1rem; font-size: 1.5rem;">Performance Analysis</h2>
+                        <div
                             style="background: var(--bg-panel); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border); height: 400px;">
-                        <canvas id="performanceChart"></canvas>
+                            <canvas id="performanceChart"></canvas>
+                        </div>
+                    </div>
+                    <h2 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Transaction History</h2>
+                    <div class="table-container"
+                        style="background: var(--bg-panel); border-radius: var(--radius-md); border: 1px solid var(--border); overflow: hidden;">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="background: var(--bg-hover); color: var(--text-muted); text-align: left;">
+                                    <th style="padding: 1rem;">Date</th>
+                                    <th style="padding: 1rem;">Type</th>
+                                    <th style="padding: 1rem;">Symbol</th>
+                                    <th style="padding: 1rem;">Quantity</th>
+                                    <th style="padding: 1rem;">Price</th>
+                                    <th style="padding: 1rem;">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transaction-table-body">
+                                <tr>
+                                    <td colspan="6"
+                                        style="padding: 2rem; text-align: center; color: var(--text-muted);">Select a
+                                        portfolio to view history</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination-controls"
+                        style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1rem;">
+                        <button id="prev-page-btn" class="btn secondary-btn" disabled><i
+                                class="fa-solid fa-chevron-left"></i> Previous</button>
+                        <button id="next-page-btn" class="btn secondary-btn" disabled>Next <i
+                                class="fa-solid fa-chevron-right"></i></button>
                     </div>
                 </div>
-                <h2 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Transaction History</h2>
-                <div class="table-container"
-                     style="background: var(--bg-panel); border-radius: var(--radius-md); border: 1px solid var(--border); overflow: hidden;">
-                    <table style="width: 100%; border-collapse: collapse;">
-                        <thead>
-                        <tr style="background: var(--bg-hover); color: var(--text-muted); text-align: left;">
-                            <th style="padding: 1rem;">Date</th>
-                            <th style="padding: 1rem;">Type</th>
-                            <th style="padding: 1rem;">Symbol</th>
-                            <th style="padding: 1rem;">Quantity</th>
-                            <th style="padding: 1rem;">Price</th>
-                            <th style="padding: 1rem;">Total</th>
-                        </tr>
-                        </thead>
-                        <tbody id="transaction-table-body">
-                        <tr>
-                            <td colspan="6"
-                                style="padding: 2rem; text-align: center; color: var(--text-muted);">Select a
-                                portfolio to view history</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="pagination-controls"
-                     style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1rem;">
-                    <button id="prev-page-btn" class="btn secondary-btn" disabled><i
-                            class="fa-solid fa-chevron-left"></i> Previous</button>
-                    <button id="next-page-btn" class="btn secondary-btn" disabled>Next <i
-                            class="fa-solid fa-chevron-right"></i></button>
-                </div>
             </div>
-        </div>
-    </main>
-</div>
+        </main>
+    </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="js/utils.js"></script>
-<script src="js/portfolio.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/portfolio.js"></script>
 </body>
 
 </html>
