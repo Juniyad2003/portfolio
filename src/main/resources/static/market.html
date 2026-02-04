@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Data - Portfolio Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<div class="app-container">
+    <aside class="sidebar">
+
+        <nav class="nav-menu">
+            <a href="index.html" class="nav-item">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="market.html" class="nav-item active">
+                <i class="fa-solid fa-magnifying-glass-dollar"></i>
+                <span>Market Data</span>
+            </a>
+            <a href="portfolio.html" class="nav-item">
+                <i class="fa-solid fa-briefcase"></i>
+                <span>Portfolios</span>
+            </a>
+            <a href="ai-chat.html" class="nav-item">
+                <i class="fa-solid fa-robot"></i>
+                <span>AI Assistant</span>
+            </a>
+        </nav>
+        <div class="user-profile">
+            <div class="avatar">U</div>
+            <div class="user-info">
+                <span class="name">User</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="app-header-center">
+            <div class="logo-container">
+                <i class="fa-solid fa-chart-line brand-gradient"
+                   style="font-size: 2.5rem; -webkit-text-fill-color: initial; background: none; color: #6366f1;"></i>
+                <h1 class="brand-gradient">FinTrack</h1>
+            </div>
+            <div class="slogan">Track It; Grow It; Own It</div>
+        </header>
+
+        <header class="top-bar">
+            <h1 id="page-title">Market Data</h1>
+
+        </header>
+
+        <div class="content-section">
+            <!-- Asset Type Selector -->
+            <div class="asset-type-selector">
+                <h3 style="margin-bottom: 1rem; font-size: 1.1rem;">What would you like to invest in?</h3>
+                <div class="asset-type-buttons">
+                    <button class="asset-type-btn active" data-type="STOCK" onclick="setAssetType('STOCK')">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span>Stocks</span>
+                    </button>
+                    <button class="asset-type-btn" data-type="CRYPTO" onclick="setAssetType('CRYPTO')">
+                        <i class="fa-brands fa-bitcoin"></i>
+                        <span>Crypto</span>
+                    </button>
+                    <button class="asset-type-btn" data-type="ETF" onclick="setAssetType('ETF')">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <span>ETFs</span>
+                    </button>
+                    <button class="asset-type-btn" data-type="MUTUAL_FUND" onclick="setAssetType('MUTUAL_FUND')">
+                        <i class="fa-solid fa-building-columns"></i>
+                        <span>Mutual Funds</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="search-box" style="margin-top: 2rem;">
+                <input type="text" id="stock-symbol-input" placeholder="Enter Stock Symbol (e.g., AAPL, TSLA)...">
+                <button id="search-stock-btn" class="btn primary-btn"><i class="fa-solid fa-search"></i>
+                    Search</button>
+            </div>
+
+            <div id="stock-data-container" class="stock-result hidden">
+
+            </div>
+
+            <div class="content-section" style="margin-top: 3rem;">
+                <div class="section-header">
+                    <h2>Recommended Stocks</h2>
+                </div>
+                <div id="recommendations-container" class="portfolio-grid">
+                </div>
+            </div>
+
+        </div>
+    </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/market.js"></script>
+</body>
+
+</html>

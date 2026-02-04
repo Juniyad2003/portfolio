@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<div class="app-container">
+    <aside class="sidebar">
+
+
+        <nav class="nav-menu">
+            <a href="index.html" class="nav-item active">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="market.html" class="nav-item">
+                <i class="fa-solid fa-magnifying-glass-dollar"></i>
+                <span>Market Data</span>
+            </a>
+            <a href="portfolio.html" class="nav-item">
+                <i class="fa-solid fa-briefcase"></i>
+                <span>Portfolios</span>
+            </a>
+            <a href="ai-chat.html" class="nav-item">
+                <i class="fa-solid fa-robot"></i>
+                <span>AI Assistant</span>
+            </a>
+        </nav>
+
+        <div class="user-profile">
+            <div class="avatar">U</div>
+            <div class="user-info">
+                <span class="name">User</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="app-header-center">
+            <div class="logo-container">
+                <i class="fa-solid fa-chart-line brand-gradient"
+                   style="font-size: 2.5rem; -webkit-text-fill-color: initial; background: none; color: #6366f1;"></i>
+                <h1 class="brand-gradient">FinTrack</h1>
+            </div>
+            <div class="slogan">Track It; Grow It; Own It</div>
+        </header>
+
+        <!-- Header -->
+        <header class="top-bar">
+            <h1 id="page-title">Dashboard</h1>
+
+        </header>
+
+        <div class="view-section active">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="icon-box blue"><i class="fa-solid fa-wallet"></i></div>
+                    <div class="stat-info">
+                        <span class="label">Total Balance</span>
+                        <span class="value" id="total-balance">$0.00</span>
+                        <span class="trend neutral" id="balance-trend">--</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon-box green"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                    <div class="stat-info">
+                        <span class="label">Total Profit</span>
+                        <span class="value" id="total-profit">$0.00</span>
+                        <span class="trend neutral" id="profit-trend">--</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon-box purple"><i class="fa-solid fa-layer-group"></i></div>
+                    <div class="stat-info">
+                        <span class="label">Portfolios</span>
+                        <span class="value" id="portfolio-count">0</span>
+                        <span class="trend neutral">Active</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="section-header">
+                    <h2>Your Portfolios</h2>
+                </div>
+                <div id="portfolio-list" class="portfolio-grid">
+                    <div class="loading-spinner"><i class="fa-solid fa-spinner fa-spin"></i> Loading...</div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+
+</html>
