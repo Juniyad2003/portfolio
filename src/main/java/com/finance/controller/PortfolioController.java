@@ -27,6 +27,19 @@ public class PortfolioController {
     @GetMapping("")
     public ResponseEntity<List<Portfolio>> getAllPortfolios() {
         List<Portfolio> portfolios = portfolioService.findAllPortfolios();
+
+        // Recalculate portfolio values from assets to ensure accuracy
+        for (Portfolio portfolio : portfolios) {
+            List<Asset> assets = assetService.findAllAssetsByPortfolioId(portfolio.getId());
+            com.finance.logic.PortfolioCalculator.calculatePortfolio(portfolio, assets);
+            // Save the recalculated values to database
+            try {
+                portfolioService.updatePortfolio(portfolio);
+            } catch (Exception e) {
+                System.err.println("Failed to update portfolio " + portfolio.getId() + ": " + e.getMessage());
+            }
+        }
+
         return new ResponseEntity<>(portfolios, HttpStatus.OK);
     }
 
@@ -39,11 +52,17 @@ public class PortfolioController {
     }
 
     @GetMapping("/{id}/assets")
-    public ResponseEntity<List<Asset>> getAssetsByPortfolio(@PathVariable int id)
+    public ResponseEntity<org.springframework.data.domain.Page<Asset>> getAssetsByPortfolio(
+            @PathVariable int id,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size)
             throws InvalidPortfolioIdException {
 
-        Portfolio portfolio = portfolioService.findPortfolioById(id);
-        List<Asset> assets = assetService.findAssetsByPortfolio(portfolio);
+        // Check if portfolio exists (optional, but good practice)
+        portfolioService.findPortfolioById(id);
+
+        org.springframework.data.domain.Page<Asset> assets = assetService.findAssetsByPortfolioId(id,
+                org.springframework.data.domain.PageRequest.of(page, size));
 
         return new ResponseEntity<>(assets, HttpStatus.OK);
     }
@@ -75,5 +94,52 @@ public class PortfolioController {
 
         Portfolio deleted = portfolioService.deletePortfolio(id);
         return new ResponseEntity<>(deleted, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/performance")
+    public ResponseEntity<List<com.finance.dto.PerformancePoint>> getPortfolioPerformance(
+            @PathVariable int id,
+            @RequestParam(defaultValue = "1M") String range)
+            throws InvalidPortfolioIdException {
+
+        // Check if portfolio exists
+        Portfolio portfolio = portfolioService.findPortfolioById(id);
+
+        // Simulate history
+        List<com.finance.dto.PerformancePoint> history = new java.util.ArrayList<>();
+        double currentValue = portfolio.getCurrentValue();
+
+        // Volatility based on risk
+        double volatility = switch (portfolio.getRiskPreference()) {
+            case "HIGH" -> 0.05; // 5% daily swing
+            case "MEDIUM" -> 0.02; // 2%
+            case "LOW" -> 0.005; // 0.5%
+            default -> 0.01;
+        };
+
+        int days = switch (range) {
+            case "1W" -> 7;
+            case "1Y" -> 365;
+            default -> 30; // 1M
+        };
+
+        // Work backwards from today
+        java.time.LocalDate date = java.time.LocalDate.now();
+        history.add(new com.finance.dto.PerformancePoint(date, currentValue));
+
+        for (int i = 1; i < days; i++) {
+            date = date.minusDays(1);
+            // Random change: -volatility to +volatility
+            double change = (Math.random() * volatility * 2) - volatility;
+            double prevValue = currentValue / (1 + change);
+
+            history.add(new com.finance.dto.PerformancePoint(date, prevValue));
+            currentValue = prevValue;
+        }
+
+        // Sort by date ascending for the graph
+        history.sort((p1, p2) -> p1.getDate().compareTo(p2.getDate()));
+
+        return new ResponseEntity<>(history, HttpStatus.OK);
     }
 }
