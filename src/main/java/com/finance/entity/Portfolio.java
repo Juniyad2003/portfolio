@@ -17,7 +17,6 @@ public class Portfolio extends Investor {
     double totalProfitLoss;
 
     @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
-    @JsonIgnore
     List<Asset> assets;
 
     public Portfolio() {
@@ -28,7 +27,7 @@ public class Portfolio extends Investor {
                      String investmentGoal, String riskPreference,
                      String portfolioName) {
 
-        super(id, name, email, investmentGoal, riskPreference);
+        super(id, name, email, investmentGoal, riskPreference, null);
         this.portfolioName = portfolioName;
     }
 
@@ -36,7 +35,7 @@ public class Portfolio extends Investor {
                      String investmentGoal, String riskPreference,
                      String portfolioName) {
 
-        super(name, email, investmentGoal, riskPreference);
+        super(name, email, investmentGoal, riskPreference, null);
         this.portfolioName = portfolioName;
     }
 

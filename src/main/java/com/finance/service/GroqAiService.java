@@ -21,29 +21,36 @@ public class GroqAiService {
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(apiKey);
 
-        String body = """
-        {
-          "model": "llama-3.1-8b-instant",
-          "messages": [
-            {
-              "role": "system",
-              "content": "You are a financial education assistant. Do not give investment advice or price prediction."
-            },
-            {
-              "role": "user",
-              "content": "%s"
-            }
-          ]
+        // Use ObjectMapper to construct valid JSON
+        com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+        com.fasterxml.jackson.databind.node.ObjectNode root = mapper.createObjectNode();
+        root.put("model", "llama-3.1-8b-instant");
+
+        com.fasterxml.jackson.databind.node.ArrayNode messages = root.putArray("messages");
+
+        com.fasterxml.jackson.databind.node.ObjectNode systemMsg = messages.addObject();
+        systemMsg.put("role", "system");
+        systemMsg.put("content",
+                "You are a financial education assistant. Do not give investment advice or price prediction.");
+
+        com.fasterxml.jackson.databind.node.ObjectNode userMsg = messages.addObject();
+        userMsg.put("role", "user");
+        userMsg.put("content", question);
+
+        String body = "";
+        try {
+            body = mapper.writeValueAsString(root);
+        } catch (com.fasterxml.jackson.core.JsonProcessingException e) {
+            return "Error creating JSON: " + e.getMessage();
         }
-        """.formatted(question.replace("\"", ""));
 
         HttpEntity<String> request = new HttpEntity<>(body, headers);
 
         try {
-            ResponseEntity<String> response =
-                    restTemplate.postForEntity(url, request, String.class);
+            ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
 
-            return response.getBody();
+            com.fasterxml.jackson.databind.JsonNode responseRoot = mapper.readTree(response.getBody());
+            return responseRoot.path("choices").get(0).path("message").path("content").asText();
 
         } catch (Exception e) {
             e.printStackTrace();

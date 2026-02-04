@@ -29,6 +29,16 @@ public class AssetService {
         return assetRepo.findAllByPortfolio(portfolio);
     }
 
+    public org.springframework.data.domain.Page<Asset> findAssetsByPortfolioId(int portfolioId,
+                                                                               org.springframework.data.domain.Pageable pageable) {
+        return assetRepo.findByPortfolio_Id(portfolioId, pageable);
+    }
+
+    public List<Asset> findAllAssetsByPortfolioId(int portfolioId) {
+        return assetRepo.findByPortfolio_Id(portfolioId, org.springframework.data.domain.Pageable.unpaged())
+                .getContent();
+    }
+
     public List<Asset> findAllAssets() {
         return assetRepo.findAll();
     }

@@ -16,7 +16,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
-//@OneToMany(mappedBy = "asset", cascade = CascadeType.ALL)
+// @OneToMany(mappedBy = "asset", cascade = CascadeType.ALL)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Asset {
 
@@ -25,7 +25,7 @@ public class Asset {
     int id;
 
     String assetName;
-    String assetType;   // STOCK, MUTUAL_FUND, CRYPTO, ETF
+    String assetType; // STOCK, MUTUAL_FUND, CRYPTO, ETF
 
     double investedAmount;
     double currentAmount;
@@ -34,13 +34,13 @@ public class Asset {
 
     @ManyToOne
     @JoinColumn(name = "portfolio_id")
+    @JsonIgnore
     Portfolio portfolio;
 
     @OneToMany(mappedBy = "asset", cascade = CascadeType.ALL)
     List<Transaction> transactions;
 
-
-
+    double quantity;
 
     public Asset() {
         super();
@@ -48,7 +48,7 @@ public class Asset {
 
     public Asset(String assetName, String assetType,
                  double investedAmount, double currentAmount,
-                 String volatilityLevel) {
+                 String volatilityLevel, double quantity) {
 
         super();
         this.assetName = assetName;
@@ -56,6 +56,15 @@ public class Asset {
         this.investedAmount = investedAmount;
         this.currentAmount = currentAmount;
         this.volatilityLevel = volatilityLevel;
+        this.quantity = quantity;
+    }
+
+    public double getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
     }
 
     public int getId() {
@@ -109,7 +118,6 @@ public class Asset {
     public void setPortfolio(Portfolio portfolio) {
         this.portfolio = portfolio;
     }
-
 
     @Override
     public String toString() {

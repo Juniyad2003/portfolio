@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AssetRepo extends JpaRepository<Asset,Integer> {
-    public List<Asset>
-    findAllByPortfolio(Portfolio portfolio);
+public interface AssetRepo extends JpaRepository<Asset, Integer> {
+    public List<Asset> findAllByPortfolio(Portfolio portfolio);
+
+    public org.springframework.data.domain.Page<Asset> findByPortfolio_Id(int portfolioId,
+                                                                          org.springframework.data.domain.Pageable pageable);
 }
