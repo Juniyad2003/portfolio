@@ -64,6 +64,9 @@ async function loadDashboard() {
             profitTrendEl.innerHTML = trendIcon + roiText;
         }
 
+        // Load Asset Stats
+        loadAssetStats();
+
     } catch (error) {
         console.error('Failed to load portfolios:', error);
         portfolioList.innerHTML = `
@@ -71,6 +74,53 @@ async function loadDashboard() {
                 <p style="color: var(--danger)">Failed to load data. Is the backend running?</p>
             </div>
         `;
+    }
+}
+
+async function loadAssetStats() {
+    const grid = document.getElementById('asset-profit-grid');
+    if (!grid) return;
+
+    try {
+        const response = await axios.get('/portfolios/stats/profit-by-type');
+        const stats = response.data; // Map<String, Double>
+
+        if (!stats || Object.keys(stats).length === 0) {
+             grid.innerHTML = '<p class="text-muted">No asset data available.</p>';
+             return;
+        }
+        
+        const typeConfig = {
+            'STOCK': { icon: 'fa-chart-pie', color: 'blue', label: 'Stocks' },
+            'CRYPTO': { icon: 'fa-coins', color: 'orange', label: 'Crypto' }, // fa-bitcoin-sign
+            'ETF': { icon: 'fa-layer-group', color: 'purple', label: 'ETFs' },
+            'MUTUAL_FUND': { icon: 'fa-piggy-bank', color: 'green', label: 'Mutual Funds' }
+        };
+
+        grid.innerHTML = Object.entries(stats).map(([type, profit]) => {
+            const config = typeConfig[type] || { icon: 'fa-box', color: 'gray', label: type };
+            const isProfit = profit >= 0;
+            const profitText = (isProfit ? '+' : '') + '$' + profit.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            const trendClass = isProfit ? 'trend up' : 'trend down';
+            
+            // Inline style for orange since it might not be in css
+            const colorStyle = config.color === 'orange' ? 'color: #f59e0b; background: rgba(245, 158, 11, 0.1);' : '';
+            const iconClass = config.color !== 'orange' ? `icon-box ${config.color}` : 'icon-box';
+
+            return `
+            <div class="stat-card">
+                <div class="${iconClass}" style="${colorStyle}"><i class="fa-solid ${config.icon}"></i></div>
+                <div class="stat-info">
+                    <span class="label">${config.label}</span>
+                    <span class="value" style="font-size: 1.2rem;">${profitText}</span>
+                </div>
+            </div>
+            `;
+        }).join('');
+
+    } catch (error) {
+        console.error('Failed to load asset stats:', error);
+        grid.innerHTML = '<p class="text-danger">Failed to load stats.</p>';
     }
 }
 
