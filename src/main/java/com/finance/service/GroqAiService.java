@@ -11,7 +11,17 @@ public class GroqAiService {
     @Value("${groq.api-key}")
     private String apiKey;
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    private RestTemplate restTemplate;
+
+    public GroqAiService() {
+        this.restTemplate = new RestTemplate();
+    }
+
+    // Package-visible constructor to allow injecting a mock RestTemplate and apiKey in tests
+    GroqAiService(RestTemplate restTemplate, String apiKey) {
+        this.restTemplate = restTemplate;
+        this.apiKey = apiKey;
+    }
 
     public String askAi(String question) {
 
