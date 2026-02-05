@@ -139,7 +139,7 @@ public class AssetServiceTest {
     @Test
     void testUpdateAssetNotFound() {
         Asset assetWithDifferentId = new Asset("X", "ETF", 10, 11, "LOW", 1);
-        
+
         when(assetRepo.findById(0)).thenReturn(Optional.empty());
 
         assertThrows(InvalidAssetIdException.class, () -> assetService.updateAsset(assetWithDifferentId));
