@@ -1,5 +1,5 @@
 :root {
-    /* Colors - Premium Cream Theme */
+    /* Colors - Premium Cream Theme (Light) */
     --bg-dark: #fffef9;
     --bg-panel: #fffef9;
     --bg-hover: #f5f3ed;
@@ -23,6 +23,20 @@
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     --glow: 0 0 15px rgba(79, 70, 229, 0.3);
+}
+
+/* Dark Theme */
+body.dark-theme {
+    --bg-dark: #1a1a1a;
+    --bg-panel: #242424;
+    --bg-hover: #2d2d2d;
+    --primary: #6366f1;
+    --primary-hover: #818cf8;
+    --text-main: #f5f5f5;
+    --text-muted: #b0b0b0;
+    --border: #3a3a3a;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
 }
 
 * {

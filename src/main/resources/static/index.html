@@ -13,7 +13,6 @@
 </head>
 <body>
     <div class="app-container">
-        <!-- Sidebar -->
         <aside class="sidebar">
 
 
@@ -44,7 +43,6 @@
             </div>
         </aside>
 
-        <!-- Main Content -->
         <main class="main-content">
             <header class="app-header-center">
                 <div class="logo-container">
@@ -58,7 +56,9 @@
             <!-- Header -->
             <header class="top-bar">
                 <h1 id="page-title">Dashboard</h1>
-
+                <button id="theme-toggle" class="icon-btn" title="Toggle dark theme">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
             </header>
 
             <div class="view-section active">
@@ -110,8 +110,8 @@
         </main>
     </div>
 
-    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/theme-toggle.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/dashboard.js"></script>
 
