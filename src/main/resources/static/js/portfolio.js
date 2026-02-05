@@ -45,6 +45,25 @@ async function loadPortfolios() {
 
         attachPortfolioClickHandlers(portfolios);
 
+        document.getElementById('portfolio-list').addEventListener('click', (e) => {
+            const editBtn = e.target.closest('.edit-btn');
+            const deleteBtn = e.target.closest('.delete-btn');
+
+            if (editBtn) {
+                e.stopPropagation();
+                const id = parseInt(editBtn.dataset.id);
+                const name = editBtn.dataset.name;
+                editPortfolio(id, name);
+            }
+
+            if (deleteBtn) {
+                e.stopPropagation();
+                const id = parseInt(deleteBtn.dataset.id);
+                deletePortfolio(id);
+            }
+        });
+
+
     } catch (error) {
         console.error(error);
         list.innerHTML = '<div class="empty-state">Error loading portfolios.</div>';
@@ -55,12 +74,11 @@ async function editPortfolio(id, oldName) {
     const newName = prompt("Enter new name for portfolio:", oldName);
     if (newName && newName !== oldName) {
         try {
-            // Fetch current details first to keep other fields
-            const response = await axios.get(`/portfolios/${id}`);
-            const portfolio = response.data;
-            portfolio.portfolioName = newName;
-
-            await axios.put(`/portfolios/${id}`, portfolio);
+            // Only update the name, not the entire object
+            await axios.put(`/portfolios/${id}`, {
+                id: id,
+                portfolioName: newName
+            });
             loadPortfolios();
         } catch (error) {
             console.error(error);
