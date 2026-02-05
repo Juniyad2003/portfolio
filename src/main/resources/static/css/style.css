@@ -1,13 +1,13 @@
 :root {
-    /* Colors - Premium Dark Theme */
-    --bg-dark: #0f111a;
-    --bg-panel: #1a1d2d;
-    --bg-hover: #24283b;
+    /* Colors - Premium Cream Theme */
+    --bg-dark: #fffef9;
+    --bg-panel: #fffef9;
+    --bg-hover: #f5f3ed;
     --primary: #4f46e5;
-    --primary-hover: #4338ca;
-    --text-main: #e2e8f0;
-    --text-muted: #94a3b8;
-    --border: #2d3748;
+    --primary-hover: #6366f1;
+    --text-main: #2d2415;
+    --text-muted: #7a7263;
+    --border: #e8e3d8;
 
     --success: #10b981;
     --danger: #ef4444;
